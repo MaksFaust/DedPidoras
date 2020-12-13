@@ -28,6 +28,7 @@ namespace AnalizatorZlozonosci_MV50629
             Height = mvBtn_TablicaPrzedSortowaniem.Bottom + mvMargines;
             CenterToScreen();
 
+            
 
 
 
@@ -45,10 +46,10 @@ namespace AnalizatorZlozonosci_MV50629
             mvTxt_MinProba.Location = new Point(mvLbl_MinProba.Left, mvLbl_MinProba.Bottom + mvMargines / 4);
 
             mvLbl_MaxProba.Location = new Point(mvTxt_MinProba.Left, mvTxt_MinProba.Bottom + mvMargines / 2);
-            mvTxt_MaxProba.Width = mvBtn_WybierzKolorLinii.Width;
-            mvTxt_MaxProba.Location = new Point(mvLbl_MaxProba.Left, mvLbl_MaxProba.Bottom + mvMargines / 4);
+            mvTxt_RozmiarTabeli.Width = mvBtn_WybierzKolorLinii.Width;
+            mvTxt_RozmiarTabeli.Location = new Point(mvLbl_MaxProba.Left, mvLbl_MaxProba.Bottom + mvMargines / 4);
 
-            mvLbl_DolnaGranica.Location = new Point(mvTxt_MaxProba.Left, mvTxt_MaxProba.Bottom + mvMargines / 2);
+            mvLbl_DolnaGranica.Location = new Point(mvTxt_RozmiarTabeli.Left, mvTxt_RozmiarTabeli.Bottom + mvMargines / 2);
             mvTxt_DolnaGranica.Width = mvBtn_WybierzKolorLinii.Width;
             mvTxt_DolnaGranica.Location = new Point(mvLbl_DolnaGranica.Left, mvLbl_DolnaGranica.Bottom + mvMargines / 4);
 
@@ -126,10 +127,23 @@ namespace AnalizatorZlozonosci_MV50629
             mvdgvTabelaWynikow.Size = mvChart.Size;
             mvdgvTabelaWynikow.Location = mvChart.Location;
 
+            //wartości domyślne
+            mvTxt_MinProba.Text = PróbaBadawcza.ToString();
+            mvTxt_RozmiarTabeli.Text = MaxRozmiarTabl.ToString();
+            mvTxt_DolnaGranica.Text = DolnaGranicaWartości.ToString();
+            mvTxt_GornaGranica.Text = GórnaGranicaWartości.ToString();
+            mvCb_Algorytm.SelectedIndex = 0;
+
         }
 
         private void mvBtn_AkceptacjaDanych_Click(object sender, EventArgs e)
         {
+            if (!mvPobieranieDanych(out PróbaBadawcza, out MaxRozmiarTabl, out DolnaGranicaWartości, out GórnaGranicaWartości))
+            {
+                errorProvider1.SetError(mvBtn_AkceptacjaDanych, "ERROR: Wystąpił błąd przy pobieraniu dannych!");
+                return;
+            }
+
             Tabl = new double[MaxRozmiarTabl];
             WynikiZpomiaru = new float[MaxRozmiarTabl];
             WynikiAnalityczne = new float[MaxRozmiarTabl];
@@ -139,7 +153,39 @@ namespace AnalizatorZlozonosci_MV50629
             // ustawienie stanu braku aktywności dla przycisku akceptacji 
             mvBtn_AkceptacjaDanych.Enabled = false;
         }
-        
+
+        private bool mvPobieranieDanych(out int PróbaBadawcza, out int MaxRozmiarTabl, out double DolnaGranicaWartości, out double GórnaGranicaWartości)
+        {
+            PróbaBadawcza = 100;
+            MaxRozmiarTabl = 50;
+            DolnaGranicaWartości = 20.0;
+            GórnaGranicaWartości = 30000.0;
+            if (!int.TryParse(mvTxt_MinProba.Text, out PróbaBadawcza))
+            {
+                errorProvider1.SetError(mvTxt_MinProba, "ERROR: Wystąpił błąd przy zapisie minimalnej proby podawczej!");
+                return false;
+            }
+
+            if (!int.TryParse(mvTxt_RozmiarTabeli.Text, out MaxRozmiarTabl))
+            {
+                errorProvider1.SetError(mvTxt_RozmiarTabeli, "ERROR: Wystąpił błąd przy zapisie maksymalnego rozmiaru tabeli!");
+                return false;
+            }
+
+            if (!double.TryParse(mvTxt_DolnaGranica.Text, out DolnaGranicaWartości))
+            {
+                errorProvider1.SetError(mvTxt_DolnaGranica, "ERROR: Wystąpił błąd przy zapisie dolnej granicy!");
+                return false;
+            }
+
+            if (!double.TryParse(mvTxt_GornaGranica.Text, out GórnaGranicaWartości))
+            {
+                errorProvider1.SetError(mvTxt_GornaGranica, "ERROR: Wystąpił błąd przy zapisie górnej granicy!");
+                return false;
+            }
+            return true;
+        }
+
         private void mvBtn_TablicaPoSortowaniu_Click(object sender, EventArgs e)
         {
             int mvLicznikOD;
@@ -162,9 +208,16 @@ namespace AnalizatorZlozonosci_MV50629
                     switch (mvCb_Algorytm.SelectedIndex)
                     {
                         case 0:
-                            mvLicznikOD = AlgorytmySortowania.SelectSort(ref Tabl, 1);
+                            mvLicznikOD = AlgorytmySortowania.SelectSort(ref Tabl, l+1);
                             break;
-                        case 1: mvLicznikOD = AlgorytmySortowania.InsertionSort(ref Tabl, 1); break;
+                        case 1: mvLicznikOD = AlgorytmySortowania.InsertionSort(ref Tabl, l+1); break;
+
+                        case 2:
+                            mvLicznikOD = AlgorytmySortowania.ShellSort(ref Tabl, l+1);
+                            break;
+                        case 3:
+                            mvLicznikOD = AlgorytmySortowania.ShakeSort(ref Tabl, l + 1);
+                            break;
                         // Case'y dla kolejnych metod sortowania
                         default:
                             errorProvider1.SetError(mvBtn_TabelarycznaPrezentacja,
@@ -186,8 +239,11 @@ namespace AnalizatorZlozonosci_MV50629
                 {
                     case 0:
                     case 1:
-                        WynikiAnalityczne[l] = (1 * (1 - 1)) / 2;
+                    case 2:
+                    case 3:
+                        WynikiAnalityczne[l] = (l * (l - 1)) / 2;
                         break;
+
                     // Case'y dla kolejnych metod sortowania
                     default:
                         errorProvider1.SetError(mvBtn_TabelarycznaPrezentacja,
@@ -244,9 +300,7 @@ namespace AnalizatorZlozonosci_MV50629
 
         private void mvBtn_TabelarycznaPrezentacja_Click(object sender, EventArgs e)
         {
-            mvdgvTabelaWynikow.Location = new Point(200, 150);
-            mvdgvTabelaWynikow.Width = (int)(this.Width * 0.55F);
-            mvdgvTabelaWynikow.Height = (int)(this.Height * 0.5F);
+            
             for (int i = 0; i < MaxRozmiarTabl; i++)
             {
                 mvdgvTabelaWynikow.Rows.Add(); // dodanie nowego wiersza do kontrolki // wpisanie wyników 
@@ -294,7 +348,7 @@ namespace AnalizatorZlozonosci_MV50629
             mvChart.Titles.Add("Algorytm " + mvCb_Algorytm.SelectedItem);
             //zwymiarowanie i ustawienie kontrolki Chart
             mvChart.BackColor = mvBtn_KolorTla.BackColor;
-            mvChart.Legends["Legendl"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            mvChart.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             // utworzenie wektora pomocniczego i wpisanie do niego rozmiarów sortowanych tablic ..
             int[] RozmiarTabeli = new int[MaxRozmiarTabl];
             for (int i = 0; i < MaxRozmiarTabl; i++)
@@ -350,11 +404,11 @@ namespace AnalizatorZlozonosci_MV50629
             public int ShakeSort(ref double[] array, int n)
             {
                 var mvLicznikOd = 0;
-                for (var i = 0; i < array.Length / 2; i++)
+                for (var i = 0; i < n / 2; i++)
                 {
                     var swapFlag = false;
                     //проход слева направо
-                    for (var j = i; j < array.Length - i - 1; j++)
+                    for (var j = i; j < n - i - 1; j++)
                     {
                         mvLicznikOd++;
                         if (array[j] > array[j + 1])
@@ -365,7 +419,7 @@ namespace AnalizatorZlozonosci_MV50629
                     }
 
                     //проход справа налево
-                    for (var j = array.Length - 2 - i; j > i; j--)
+                    for (var j = n - 2 - i; j > i; j--)
                     {
                         mvLicznikOd++;
                         if (array[j - 1] > array[j])
@@ -387,13 +441,13 @@ namespace AnalizatorZlozonosci_MV50629
 
 
 
-            private int ShellSort(ref double[] array, int n)
+            public int ShellSort(ref double[] array, int n)
             {
                 var mvLicznikOd = 0;
                 var d = n / 2;
                 while (d >= 1)
                 {
-                    for (var i = d; i < array.Length; i++)
+                    for (var i = d; i < n; i++)
                     {
                         var j = i;
                         while ((j >= d) && (array[j - d] > array[j]))
@@ -458,6 +512,11 @@ namespace AnalizatorZlozonosci_MV50629
             // Update the text box color if the user clicks OK 
             if (MyDialog.ShowDialog() == DialogResult.OK)
                 mvBtn_ChangeKolor.BackColor = MyDialog.Color;
+        }
+
+        private void mvLbl_MaxProba_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

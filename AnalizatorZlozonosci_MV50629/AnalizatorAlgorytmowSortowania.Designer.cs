@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mvLbl_MinProba = new System.Windows.Forms.Label();
             this.mvLbl_MaxProba = new System.Windows.Forms.Label();
             this.mvLbl_DolnaGranica = new System.Windows.Forms.Label();
             this.mvLbl_GornaGranica = new System.Windows.Forms.Label();
             this.mvBtn_WybierzKolorLinii = new System.Windows.Forms.Button();
             this.mvTxt_MinProba = new System.Windows.Forms.TextBox();
-            this.mvTxt_MaxProba = new System.Windows.Forms.TextBox();
+            this.mvTxt_RozmiarTabeli = new System.Windows.Forms.TextBox();
             this.mvTxt_DolnaGranica = new System.Windows.Forms.TextBox();
             this.mvTxt_GornaGranica = new System.Windows.Forms.TextBox();
             this.mvLbl_WybierzAlgorytm = new System.Windows.Forms.Label();
@@ -65,14 +65,14 @@
             this.mvBtn_TablicaPrzedSortowaniem = new System.Windows.Forms.Button();
             this.mvBtn_TablicaPoSortowaniu = new System.Windows.Forms.Button();
             this.mvDgv_Tablica = new System.Windows.Forms.DataGridView();
+            this.mvRozmiarTabeli = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.mvdgvTabelaWynikow = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mvRozmiarTabeli = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mvChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.mvTb_GruboscLinii)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mvPb_WziemnikLinii)).BeginInit();
@@ -101,10 +101,11 @@
             this.mvLbl_MaxProba.Location = new System.Drawing.Point(15, 153);
             this.mvLbl_MaxProba.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_MaxProba.Name = "mvLbl_MaxProba";
-            this.mvLbl_MaxProba.Size = new System.Drawing.Size(142, 40);
+            this.mvLbl_MaxProba.Size = new System.Drawing.Size(110, 20);
             this.mvLbl_MaxProba.TabIndex = 2;
-            this.mvLbl_MaxProba.Text = "Maksymalna proba\r\nbadawcza";
+            this.mvLbl_MaxProba.Text = "Rozmiar tabeli";
             this.mvLbl_MaxProba.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mvLbl_MaxProba.Click += new System.EventHandler(this.mvLbl_MaxProba_Click);
             // 
             // mvLbl_DolnaGranica
             // 
@@ -153,15 +154,15 @@
             this.mvTxt_MinProba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mvTxt_MinProba.TextChanged += new System.EventHandler(this.mvTxt_MinProba_TextChanged);
             // 
-            // mvTxt_MaxProba
+            // mvTxt_RozmiarTabeli
             // 
-            this.mvTxt_MaxProba.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.mvTxt_MaxProba.Location = new System.Drawing.Point(15, 177);
-            this.mvTxt_MaxProba.Margin = new System.Windows.Forms.Padding(4);
-            this.mvTxt_MaxProba.Name = "mvTxt_MaxProba";
-            this.mvTxt_MaxProba.Size = new System.Drawing.Size(124, 24);
-            this.mvTxt_MaxProba.TabIndex = 7;
-            this.mvTxt_MaxProba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mvTxt_RozmiarTabeli.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mvTxt_RozmiarTabeli.Location = new System.Drawing.Point(15, 177);
+            this.mvTxt_RozmiarTabeli.Margin = new System.Windows.Forms.Padding(4);
+            this.mvTxt_RozmiarTabeli.Name = "mvTxt_RozmiarTabeli";
+            this.mvTxt_RozmiarTabeli.Size = new System.Drawing.Size(124, 24);
+            this.mvTxt_RozmiarTabeli.TabIndex = 7;
+            this.mvTxt_RozmiarTabeli.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // mvTxt_DolnaGranica
             // 
@@ -452,6 +453,16 @@
             this.mvDgv_Tablica.TabIndex = 34;
             this.mvDgv_Tablica.Visible = false;
             // 
+            // mvRozmiarTabeli
+            // 
+            this.mvRozmiarTabeli.HeaderText = "Numer";
+            this.mvRozmiarTabeli.Name = "mvRozmiarTabeli";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Element tablicy";
+            this.Column1.Name = "Column1";
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -492,28 +503,18 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "Koszt pamięciowy";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // mvRozmiarTabeli
-            // 
-            this.mvRozmiarTabeli.HeaderText = "Numer";
-            this.mvRozmiarTabeli.Name = "mvRozmiarTabeli";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Element tablicy";
-            this.Column1.Name = "Column1";
-            // 
             // mvChart
             // 
-            chartArea9.Name = "ChartArea1";
-            this.mvChart.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.mvChart.Legends.Add(legend9);
+            chartArea2.Name = "ChartArea1";
+            this.mvChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.mvChart.Legends.Add(legend2);
             this.mvChart.Location = new System.Drawing.Point(282, 209);
             this.mvChart.Name = "mvChart";
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.mvChart.Series.Add(series9);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.mvChart.Series.Add(series2);
             this.mvChart.Size = new System.Drawing.Size(300, 300);
             this.mvChart.TabIndex = 36;
             this.mvChart.Text = "chart1";
@@ -551,7 +552,7 @@
             this.Controls.Add(this.mvLbl_WybierzAlgorytm);
             this.Controls.Add(this.mvTxt_GornaGranica);
             this.Controls.Add(this.mvTxt_DolnaGranica);
-            this.Controls.Add(this.mvTxt_MaxProba);
+            this.Controls.Add(this.mvTxt_RozmiarTabeli);
             this.Controls.Add(this.mvTxt_MinProba);
             this.Controls.Add(this.mvBtn_WybierzKolorLinii);
             this.Controls.Add(this.mvLbl_GornaGranica);
@@ -582,7 +583,7 @@
         private System.Windows.Forms.Label mvLbl_GornaGranica;
         private System.Windows.Forms.Button mvBtn_WybierzKolorLinii;
         private System.Windows.Forms.TextBox mvTxt_MinProba;
-        private System.Windows.Forms.TextBox mvTxt_MaxProba;
+        private System.Windows.Forms.TextBox mvTxt_RozmiarTabeli;
         private System.Windows.Forms.TextBox mvTxt_DolnaGranica;
         private System.Windows.Forms.TextBox mvTxt_GornaGranica;
         private System.Windows.Forms.Label mvLbl_WybierzAlgorytm;
