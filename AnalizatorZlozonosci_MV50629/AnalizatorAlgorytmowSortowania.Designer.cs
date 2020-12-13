@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mvLbl_MinProba = new System.Windows.Forms.Label();
             this.mvLbl_MaxProba = new System.Windows.Forms.Label();
             this.mvLbl_DolnaGranica = new System.Windows.Forms.Label();
@@ -140,6 +140,7 @@
             this.mvBtn_WybierzKolorLinii.TabIndex = 5;
             this.mvBtn_WybierzKolorLinii.Text = "Wybierz kolor linii";
             this.mvBtn_WybierzKolorLinii.UseVisualStyleBackColor = true;
+            this.mvBtn_WybierzKolorLinii.Click += new System.EventHandler(this.mvBtn_WybierzKolorLinii_Click);
             // 
             // mvTxt_MinProba
             // 
@@ -150,6 +151,7 @@
             this.mvTxt_MinProba.Size = new System.Drawing.Size(124, 24);
             this.mvTxt_MinProba.TabIndex = 6;
             this.mvTxt_MinProba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mvTxt_MinProba.TextChanged += new System.EventHandler(this.mvTxt_MinProba_TextChanged);
             // 
             // mvTxt_MaxProba
             // 
@@ -196,6 +198,11 @@
             // 
             this.mvCb_Algorytm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvCb_Algorytm.FormattingEnabled = true;
+            this.mvCb_Algorytm.Items.AddRange(new object[] {
+            "Selected Sort",
+            "Insert Sort",
+            "Shell Sort",
+            "Shake Sort"});
             this.mvCb_Algorytm.Location = new System.Drawing.Point(19, 359);
             this.mvCb_Algorytm.Name = "mvCb_Algorytm";
             this.mvCb_Algorytm.Size = new System.Drawing.Size(121, 25);
@@ -210,6 +217,7 @@
             this.mvBtn_AkceptacjaDanych.TabIndex = 12;
             this.mvBtn_AkceptacjaDanych.Text = "Akceptacja danych\r\ndla badania\r\neksperymentalnego";
             this.mvBtn_AkceptacjaDanych.UseVisualStyleBackColor = true;
+            this.mvBtn_AkceptacjaDanych.Click += new System.EventHandler(this.mvBtn_AkceptacjaDanych_Click);
             // 
             // mvLbl_Analizator
             // 
@@ -394,6 +402,7 @@
             this.mvBtn_GraficznaPrezentacja.TabIndex = 29;
             this.mvBtn_GraficznaPrezentacja.Text = "Graficzna\r\nprezentacja\r\nzlozonosci";
             this.mvBtn_GraficznaPrezentacja.UseVisualStyleBackColor = true;
+            this.mvBtn_GraficznaPrezentacja.Click += new System.EventHandler(this.mvBtn_GraficznaPrezentacja_Click);
             // 
             // mvBtn_Resetuj
             // 
@@ -459,7 +468,7 @@
             this.mvdgvTabelaWynikow.Name = "mvdgvTabelaWynikow";
             this.mvdgvTabelaWynikow.RowHeadersWidth = 51;
             this.mvdgvTabelaWynikow.RowTemplate.Height = 24;
-            this.mvdgvTabelaWynikow.Size = new System.Drawing.Size(240, 150);
+            this.mvdgvTabelaWynikow.Size = new System.Drawing.Size(341, 150);
             this.mvdgvTabelaWynikow.TabIndex = 35;
             this.mvdgvTabelaWynikow.Visible = false;
             // 
@@ -495,16 +504,16 @@
             // 
             // mvChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.mvChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.mvChart.Legends.Add(legend1);
+            chartArea9.Name = "ChartArea1";
+            this.mvChart.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.mvChart.Legends.Add(legend9);
             this.mvChart.Location = new System.Drawing.Point(282, 209);
             this.mvChart.Name = "mvChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.mvChart.Series.Add(series1);
+            series9.ChartArea = "ChartArea1";
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.mvChart.Series.Add(series9);
             this.mvChart.Size = new System.Drawing.Size(300, 300);
             this.mvChart.TabIndex = 36;
             this.mvChart.Text = "chart1";
