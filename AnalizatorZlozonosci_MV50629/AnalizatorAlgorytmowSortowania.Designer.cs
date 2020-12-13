@@ -50,7 +50,7 @@
             this.mvLbl_MinProba.Location = new System.Drawing.Point(15, 96);
             this.mvLbl_MinProba.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_MinProba.Name = "mvLbl_MinProba";
-            this.mvLbl_MinProba.Size = new System.Drawing.Size(156, 50);
+            this.mvLbl_MinProba.Size = new System.Drawing.Size(125, 40);
             this.mvLbl_MinProba.TabIndex = 1;
             this.mvLbl_MinProba.Text = "Minimalna próba\r\nbadawcza";
             this.mvLbl_MinProba.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -62,7 +62,7 @@
             this.mvLbl_MaxProba.Location = new System.Drawing.Point(15, 153);
             this.mvLbl_MaxProba.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_MaxProba.Name = "mvLbl_MaxProba";
-            this.mvLbl_MaxProba.Size = new System.Drawing.Size(272, 25);
+            this.mvLbl_MaxProba.Size = new System.Drawing.Size(218, 20);
             this.mvLbl_MaxProba.TabIndex = 2;
             this.mvLbl_MaxProba.Text = "Maksymalna proba badawcza";
             this.mvLbl_MaxProba.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -74,7 +74,7 @@
             this.mvLbl_DolnaGranica.Location = new System.Drawing.Point(15, 209);
             this.mvLbl_DolnaGranica.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_DolnaGranica.Name = "mvLbl_DolnaGranica";
-            this.mvLbl_DolnaGranica.Size = new System.Drawing.Size(132, 25);
+            this.mvLbl_DolnaGranica.Size = new System.Drawing.Size(107, 20);
             this.mvLbl_DolnaGranica.TabIndex = 3;
             this.mvLbl_DolnaGranica.Text = "Dolna granica";
             this.mvLbl_DolnaGranica.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -86,7 +86,7 @@
             this.mvLbl_GornaGranica.Location = new System.Drawing.Point(15, 265);
             this.mvLbl_GornaGranica.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_GornaGranica.Name = "mvLbl_GornaGranica";
-            this.mvLbl_GornaGranica.Size = new System.Drawing.Size(135, 25);
+            this.mvLbl_GornaGranica.Size = new System.Drawing.Size(110, 20);
             this.mvLbl_GornaGranica.TabIndex = 4;
             this.mvLbl_GornaGranica.Text = "Gorna granica";
             this.mvLbl_GornaGranica.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,7 +95,7 @@
             // 
             this.mvBtn_WybierzKolorLinii.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_WybierzKolorLinii.Location = new System.Drawing.Point(19, 15);
-            this.mvBtn_WybierzKolorLinii.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mvBtn_WybierzKolorLinii.Margin = new System.Windows.Forms.Padding(4);
             this.mvBtn_WybierzKolorLinii.Name = "mvBtn_WybierzKolorLinii";
             this.mvBtn_WybierzKolorLinii.Size = new System.Drawing.Size(129, 54);
             this.mvBtn_WybierzKolorLinii.TabIndex = 5;
@@ -106,9 +106,9 @@
             // 
             this.mvTxt_MinProba.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvTxt_MinProba.Location = new System.Drawing.Point(19, 121);
-            this.mvTxt_MinProba.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mvTxt_MinProba.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_MinProba.Name = "mvTxt_MinProba";
-            this.mvTxt_MinProba.Size = new System.Drawing.Size(124, 28);
+            this.mvTxt_MinProba.Size = new System.Drawing.Size(124, 24);
             this.mvTxt_MinProba.TabIndex = 6;
             this.mvTxt_MinProba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -116,9 +116,9 @@
             // 
             this.mvTxt_MaxProba.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvTxt_MaxProba.Location = new System.Drawing.Point(15, 177);
-            this.mvTxt_MaxProba.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mvTxt_MaxProba.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_MaxProba.Name = "mvTxt_MaxProba";
-            this.mvTxt_MaxProba.Size = new System.Drawing.Size(124, 28);
+            this.mvTxt_MaxProba.Size = new System.Drawing.Size(124, 24);
             this.mvTxt_MaxProba.TabIndex = 7;
             this.mvTxt_MaxProba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -126,9 +126,9 @@
             // 
             this.mvTxt_DolnaGranica.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvTxt_DolnaGranica.Location = new System.Drawing.Point(22, 243);
-            this.mvTxt_DolnaGranica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mvTxt_DolnaGranica.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_DolnaGranica.Name = "mvTxt_DolnaGranica";
-            this.mvTxt_DolnaGranica.Size = new System.Drawing.Size(124, 28);
+            this.mvTxt_DolnaGranica.Size = new System.Drawing.Size(124, 24);
             this.mvTxt_DolnaGranica.TabIndex = 8;
             this.mvTxt_DolnaGranica.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -136,9 +136,9 @@
             // 
             this.mvTxt_GornaGranica.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvTxt_GornaGranica.Location = new System.Drawing.Point(19, 299);
-            this.mvTxt_GornaGranica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mvTxt_GornaGranica.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_GornaGranica.Name = "mvTxt_GornaGranica";
-            this.mvTxt_GornaGranica.Size = new System.Drawing.Size(124, 28);
+            this.mvTxt_GornaGranica.Size = new System.Drawing.Size(124, 24);
             this.mvTxt_GornaGranica.TabIndex = 9;
             this.mvTxt_GornaGranica.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -148,7 +148,7 @@
             this.mvLbl_WybierzAlgorytm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvLbl_WybierzAlgorytm.Location = new System.Drawing.Point(17, 331);
             this.mvLbl_WybierzAlgorytm.Name = "mvLbl_WybierzAlgorytm";
-            this.mvLbl_WybierzAlgorytm.Size = new System.Drawing.Size(256, 25);
+            this.mvLbl_WybierzAlgorytm.Size = new System.Drawing.Size(203, 20);
             this.mvLbl_WybierzAlgorytm.TabIndex = 10;
             this.mvLbl_WybierzAlgorytm.Text = "Wybierz algorytm do analizy";
             this.mvLbl_WybierzAlgorytm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -159,7 +159,7 @@
             this.mvCb_Algorytm.FormattingEnabled = true;
             this.mvCb_Algorytm.Location = new System.Drawing.Point(19, 359);
             this.mvCb_Algorytm.Name = "mvCb_Algorytm";
-            this.mvCb_Algorytm.Size = new System.Drawing.Size(121, 30);
+            this.mvCb_Algorytm.Size = new System.Drawing.Size(121, 25);
             this.mvCb_Algorytm.TabIndex = 11;
             // 
             // mvBtn_AkceptacjaDanych
@@ -171,19 +171,20 @@
             this.mvBtn_AkceptacjaDanych.TabIndex = 12;
             this.mvBtn_AkceptacjaDanych.Text = "Akceptacja danych\r\ndla badania\r\neksperymentalnego";
             this.mvBtn_AkceptacjaDanych.UseVisualStyleBackColor = true;
+            this.mvBtn_AkceptacjaDanych.Click += new System.EventHandler(this.mvBtn_AkceptacjaDanych_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(585, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.Size = new System.Drawing.Size(46, 17);
             this.label1.TabIndex = 13;
             this.label1.Text = "label1";
             // 
             // AnalizatorAlgorytmowSortowania
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1641, 796);
             this.Controls.Add(this.label1);
@@ -200,7 +201,7 @@
             this.Controls.Add(this.mvLbl_MaxProba);
             this.Controls.Add(this.mvLbl_MinProba);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AnalizatorAlgorytmowSortowania";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.AnalizatorAlgorytmowSortowania_Load);

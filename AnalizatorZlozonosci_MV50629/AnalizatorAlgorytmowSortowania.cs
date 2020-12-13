@@ -51,5 +51,10 @@ namespace AnalizatorZlozonosci_MV50629
 
 
         }
+
+        private void mvBtn_AkceptacjaDanych_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
