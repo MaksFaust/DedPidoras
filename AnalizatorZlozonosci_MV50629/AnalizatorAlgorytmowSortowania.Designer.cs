@@ -416,7 +416,7 @@
             // mvPb_MainPb
             // 
             this.mvPb_MainPb.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.mvPb_MainPb.Location = new System.Drawing.Point(395, 243);
+            this.mvPb_MainPb.Location = new System.Drawing.Point(407, 287);
             this.mvPb_MainPb.Name = "mvPb_MainPb";
             this.mvPb_MainPb.Size = new System.Drawing.Size(100, 50);
             this.mvPb_MainPb.TabIndex = 33;
@@ -425,7 +425,7 @@
             // mvDgv_Tablica
             // 
             this.mvDgv_Tablica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.mvDgv_Tablica.Location = new System.Drawing.Point(245, 393);
+            this.mvDgv_Tablica.Location = new System.Drawing.Point(432, 355);
             this.mvDgv_Tablica.Name = "mvDgv_Tablica";
             this.mvDgv_Tablica.RowHeadersWidth = 51;
             this.mvDgv_Tablica.RowTemplate.Height = 24;
