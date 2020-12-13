@@ -21,8 +21,8 @@ namespace AnalizatorZlozonosci_MV50629
         public AnalizatorAlgorytmowSortowania()
         {
             InitializeComponent();
-            Width = (int) (Screen.PrimaryScreen.Bounds.Width * 0.9);
-            Height = (int) (Screen.PrimaryScreen.Bounds.Height * 0.8);
+            Width = mvLbl_GruboscLinii.Right + mvMargines*2;
+            Height = mvBtn_TablicaPrzedSortowaniem.Bottom + mvMargines;
             CenterToScreen();
         }
 
@@ -115,6 +115,7 @@ namespace AnalizatorZlozonosci_MV50629
 
             mvDgv_Tablica.Size = mvPb_MainPb.Size;
             mvDgv_Tablica.Location = mvPb_MainPb.Location;
+
         }
     }
 }
