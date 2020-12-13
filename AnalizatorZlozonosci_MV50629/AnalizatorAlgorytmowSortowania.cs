@@ -17,7 +17,7 @@ namespace AnalizatorZlozonosci_MV50629
         int mvMaxRozmiarTabl = 50;
         double mvDolnaGranicaWartosci = 20.0;
         double mvGornaGranicaWartosci = 30000.0;
-
+        double[] mvTabl;
         public AnalizatorAlgorytmowSortowania()
         {
             InitializeComponent();
