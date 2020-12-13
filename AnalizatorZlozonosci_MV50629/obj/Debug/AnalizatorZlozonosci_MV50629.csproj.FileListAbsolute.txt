@@ -18,3 +18,13 @@ D:\Akihiro\Projects\PROJECT1-UCZELNA-C#\Project2_Sort_Zaichenko50631\Project\Ana
 D:\Akihiro\Projects\PROJECT1-UCZELNA-C#\Project2_Sort_Zaichenko50631\Project\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.csproj.CoreCompileInputs.cache
 D:\Akihiro\Projects\PROJECT1-UCZELNA-C#\Project2_Sort_Zaichenko50631\Project\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.exe
 D:\Akihiro\Projects\PROJECT1-UCZELNA-C#\Project2_Sort_Zaichenko50631\Project\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.pdb
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\bin\Debug\AnalizatorZlozonosci_MV50629.exe.config
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\bin\Debug\AnalizatorZlozonosci_MV50629.exe
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\bin\Debug\AnalizatorZlozonosci_MV50629.pdb
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.csprojAssemblyReference.cache
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.AnalizatorAlgorytmowSortowania.resources
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.Properties.Resources.resources
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.csproj.GenerateResource.cache
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.csproj.CoreCompileInputs.cache
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.exe
+D:\Папка для хрущей\Analizator\DedPidoras\AnalizatorZlozonosci_MV50629\obj\Debug\AnalizatorZlozonosci_MV50629.pdb

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace AnalizatorZlozonosci_MV50629
     public partial class AnalizatorAlgorytmowSortowania : Form
     {
         const int mvMargines = 20;
+        int mvGruboscLinii = 1;
         int PróbaBadawcza = 100;
         int MaxRozmiarTabl = 50;
         double DolnaGranicaWartości = 20.0;
@@ -20,6 +22,7 @@ namespace AnalizatorZlozonosci_MV50629
         double[] Tabl;
         float[] WynikiZpomiaru;
         float[] WynikiAnalityczne;
+        long[] KosztPamieci;
         int[] TablicaLOD;
         public AnalizatorAlgorytmowSortowania()
         {
@@ -27,11 +30,7 @@ namespace AnalizatorZlozonosci_MV50629
             Width = mvLbl_GruboscLinii.Right + mvMargines * 2;
             Height = mvBtn_TablicaPrzedSortowaniem.Bottom + mvMargines;
             CenterToScreen();
-
-            
-
-
-
+            mvTxt_GruboscLiczbowo.Text = mvGruboscLinii.ToString();
         }
 
         private void AnalizatorAlgorytmowSortowania_Load(object sender, EventArgs e)
@@ -116,8 +115,8 @@ namespace AnalizatorZlozonosci_MV50629
             mvBtn_TablicaPrzedSortowaniem.Location = new Point(Width / 2 - (mvBtn_TablicaPrzedSortowaniem.Width + mvBtn_TablicaPoSortowaniu.Width + mvMargines) / 2, Height - mvBtn_TablicaPrzedSortowaniem.Height - mvMargines * 3);
             mvBtn_TablicaPoSortowaniu.Location = new Point(mvBtn_TablicaPrzedSortowaniem.Right + mvMargines / 2, mvBtn_TablicaPrzedSortowaniem.Top);
 
-            mvChart.Width = mvBtn_Resetuj.Left - mvBtn_AkceptacjaDanych.Right - mvMargines / 2;
-            mvChart.Height = mvBtn_TablicaPrzedSortowaniem.Top - mvBtn_WybierzKolorLinii.Bottom - mvMargines / 2;
+            mvChart.Width = mvBtn_Resetuj.Left - mvBtn_AkceptacjaDanych.Right - mvMargines*2;
+            mvChart.Height = mvBtn_TablicaPrzedSortowaniem.Top - mvBtn_WybierzKolorLinii.Bottom - mvMargines*2;
             mvChart.Location = new Point(mvBtn_AkceptacjaDanych.Right + mvMargines, mvBtn_WybierzKolorLinii.Bottom + mvMargines);
             mvChart.Visible = false;
 
@@ -143,15 +142,18 @@ namespace AnalizatorZlozonosci_MV50629
                 errorProvider1.SetError(mvBtn_AkceptacjaDanych, "ERROR: Wystąpił błąd przy pobieraniu dannych!");
                 return;
             }
-
+            errorProvider1.Dispose();
             Tabl = new double[MaxRozmiarTabl];
             WynikiZpomiaru = new float[MaxRozmiarTabl];
             WynikiAnalityczne = new float[MaxRozmiarTabl];
+            KosztPamieci = new long[MaxRozmiarTabl];
             TablicaLOD = new int[PróbaBadawcza];
             // uaktywnienie przycisku poleceń
             mvBtn_TablicaPoSortowaniu.Enabled = true;
             // ustawienie stanu braku aktywności dla przycisku akceptacji 
             mvBtn_AkceptacjaDanych.Enabled = false;
+            mvBtn_TablicaPoSortowaniu.Enabled = mvBtn_TablicaPrzedSortowaniem.Enabled = true;
+            mvCb_Algorytm.Enabled = mvTxt_DolnaGranica.Enabled = mvTxt_GornaGranica.Enabled = mvTxt_MinProba.Enabled = mvTxt_RozmiarTabeli.Enabled = false;
         }
 
         private bool mvPobieranieDanych(out int PróbaBadawcza, out int MaxRozmiarTabl, out double DolnaGranicaWartości, out double GórnaGranicaWartości)
@@ -165,24 +167,35 @@ namespace AnalizatorZlozonosci_MV50629
                 errorProvider1.SetError(mvTxt_MinProba, "ERROR: Wystąpił błąd przy zapisie minimalnej proby podawczej!");
                 return false;
             }
+            errorProvider1.Dispose();
 
             if (!int.TryParse(mvTxt_RozmiarTabeli.Text, out MaxRozmiarTabl))
             {
                 errorProvider1.SetError(mvTxt_RozmiarTabeli, "ERROR: Wystąpił błąd przy zapisie maksymalnego rozmiaru tabeli!");
                 return false;
             }
+            errorProvider1.Dispose();
 
             if (!double.TryParse(mvTxt_DolnaGranica.Text, out DolnaGranicaWartości))
             {
                 errorProvider1.SetError(mvTxt_DolnaGranica, "ERROR: Wystąpił błąd przy zapisie dolnej granicy!");
                 return false;
             }
+            errorProvider1.Dispose();
 
             if (!double.TryParse(mvTxt_GornaGranica.Text, out GórnaGranicaWartości))
             {
                 errorProvider1.SetError(mvTxt_GornaGranica, "ERROR: Wystąpił błąd przy zapisie górnej granicy!");
                 return false;
             }
+            errorProvider1.Dispose();
+
+            if(GórnaGranicaWartości < DolnaGranicaWartości)
+            {
+                errorProvider1.SetError(mvTxt_GornaGranica, "ERROR: gorna granica nie może być mniejsza od dolnej!");
+                return false;
+            }
+
             return true;
         }
 
@@ -225,8 +238,11 @@ namespace AnalizatorZlozonosci_MV50629
                     }
                     // Zapamiętanie LicznikaOD
                     TablicaLOD[k] = mvLicznikOD;
-                } // od for (int k = 0; k < PróbaBadawcza; k++)
-                  // obliczenie średniej arytmetycznej wykonanych Operacji Dominujących
+                }
+
+                KosztPamieci[l] = GC.GetTotalMemory(false);
+                // od for (int k = 0; k < PróbaBadawcza; k++)
+                // obliczenie średniej arytmetycznej wykonanych Operacji Dominujących
                 SumaOD = 0.0F;  // początkowy stan obliczeń
                 for (int j = 0; j < PróbaBadawcza; j++)
                     SumaOD = SumaOD + TablicaLOD[j];
@@ -288,26 +304,18 @@ namespace AnalizatorZlozonosci_MV50629
             mvBtn_GraficznaPrezentacja.Enabled = true;
             mvBtn_Resetuj.Enabled = true;
             mvBtn_Demo.Enabled = true;
-
-
-
         }
-
-        
-       
-
-       
 
         private void mvBtn_TabelarycznaPrezentacja_Click(object sender, EventArgs e)
         {
-            
+            mvChart.Visible = false;
             for (int i = 0; i < MaxRozmiarTabl; i++)
             {
                 mvdgvTabelaWynikow.Rows.Add(); // dodanie nowego wiersza do kontrolki // wpisanie wyników 
-                mvdgvTabelaWynikow.Rows[i].Cells[0].Value = i;
+                mvdgvTabelaWynikow.Rows[i].Cells[0].Value = i+1;
                 mvdgvTabelaWynikow.Rows[i].Cells[1].Value = String.Format("{0:F2}", WynikiZpomiaru[i]);
-                mvdgvTabelaWynikow.Rows[i].Cells[2].Value = String.Format("{0:F2}", WynikiAnalityczne[i]); // koszt pamięciowy 
-                mvdgvTabelaWynikow.Rows[i].Cells[3].Value = i;
+                mvdgvTabelaWynikow.Rows[i].Cells[2].Value = String.Format("{0:F2}", WynikiAnalityczne[i]);
+                mvdgvTabelaWynikow.Rows[i].Cells[3].Value = String.Format("{0:F2}", KosztPamieci[i]);
                 // ustawienie koloru tła (dla zwiększenia czytelności wyników)
                 if (i % 2 == 0)
                 {
@@ -347,7 +355,7 @@ namespace AnalizatorZlozonosci_MV50629
             // ustalenie tytułu wykresu
             mvChart.Titles.Add("Algorytm " + mvCb_Algorytm.SelectedItem);
             //zwymiarowanie i ustawienie kontrolki Chart
-            mvChart.BackColor = mvBtn_KolorTla.BackColor;
+            mvChart.BackColor = mvBtn_WziemnikKoloruTla.BackColor;
             mvChart.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             // utworzenie wektora pomocniczego i wpisanie do niego rozmiarów sortowanych tablic ..
             int[] RozmiarTabeli = new int[MaxRozmiarTabl];
@@ -359,20 +367,81 @@ namespace AnalizatorZlozonosci_MV50629
             // dane reprezentuje Seria[0]
             mvChart.Series[0].ChartType =
             System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            mvChart.Series[0].Color = Color.Black;
-            mvChart.Series[0].BorderDashStyle =
-            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
-            mvChart.Series[0].BorderWidth = 1;
+            mvChart.Series[0].Color = mvBtn_ChangeKolor.BackColor; 
+            switch (mvCb_StylLinii.SelectedIndex)
+            {
+                case 0:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
+                    break;
+                case 1:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+                    break;
+                case 2:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDotDot;
+                    break;
+                case 3:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+                    break;
+                case 4:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                    break;
+                default:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                    break;
+            }
+            mvChart.Series[0].BorderWidth = mvGruboscLinii;
             mvChart.Series[0].Points.DataBindXY(RozmiarTabeli, WynikiZpomiaru);
-            /* postępujemy analogicznie dla utworzenia wykresu dla kosztu analitycznego i kosztu pamięci */
-            // . . .
-            // ustawienie stanu braku aktywności dla przycisku poleceń 
+
+            mvChart.Series[1].Name = "Analtyczny koszt czasowy";
+            mvChart.Series[1].ChartType =
+            System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            mvChart.Series[1].Color = Color.Black;
+            mvChart.Series[1].BorderDashStyle =
+            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            mvChart.Series[1].BorderWidth = 1;
+            mvChart.Series[1].Points.DataBindXY(RozmiarTabeli, WynikiAnalityczne);
+
+            mvChart.Series[2].Name = "Koszt pamięciowy według GC.GetTotalMemory(false). Ilośc bajt zmnijszona o 10000";
+            mvChart.Series[2].ChartType =
+            System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            mvChart.Series[2].Color = Color.Green;
+            mvChart.Series[2].BorderDashStyle =
+            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            mvChart.Series[2].BorderWidth = 1;
+            long[] cs = new long[MaxRozmiarTabl];
+            int index = 0;
+            foreach(long l in KosztPamieci)
+            {
+                cs[index] = l/10000;
+                index++;
+            }
+            mvChart.Series[2].Points.DataBindXY(RozmiarTabeli, cs);
             mvBtn_GraficznaPrezentacja.Enabled = false;
         }
 
         private void mvTxt_MinProba_TextChanged(object sender, EventArgs e)
         {
-            if (!int.TryParse(mvTxt_MinProba.Text, out PróbaBadawcza)) errorProvider1.SetError(mvTxt_MinProba, "ERROR: wpodanej liczności Próby Badawczej wystąpił niedozwolony znak");
+            if (!int.TryParse(mvTxt_MinProba.Text, out PróbaBadawcza))
+            {
+                errorProvider1.SetError(mvTxt_MinProba, "ERROR: wpodanej liczności Próby Badawczej wystąpił niedozwolony znak");
+                mvBtn_AkceptacjaDanych.Enabled = false;
+                return;
+            }
+
+            if(PróbaBadawcza < 1)
+            {
+                errorProvider1.SetError(mvTxt_MinProba, "ERROR: Próba Badawcza nie może być mniejsza od 1!");
+                mvBtn_AkceptacjaDanych.Enabled = false;
+                return;
+            }
+            mvBtn_AkceptacjaDanych.Enabled = true;
+            errorProvider1.Dispose();
         }
 
         class Sortowanie
@@ -511,12 +580,129 @@ namespace AnalizatorZlozonosci_MV50629
             MyDialog.Color = mvBtn_ChangeKolor.BackColor;
             // Update the text box color if the user clicks OK 
             if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
                 mvBtn_ChangeKolor.BackColor = MyDialog.Color;
+                mvChart.Series[0].Color = MyDialog.Color;
+            }
         }
 
-        private void mvLbl_MaxProba_Click(object sender, EventArgs e)
+        private void mvBtn_KolorTla_Click(object sender, EventArgs e)
         {
+            ColorDialog MyDialog = new ColorDialog();
+            // Keeps the user from selecting a custom color.
+            MyDialog.AllowFullOpen = false;
+            // Allows the user to get help. (The default is false.)
+            MyDialog.ShowHelp = true;
+            // Sets the initial color select to the current text color.
+            MyDialog.Color = mvBtn_WziemnikKoloruTla.BackColor;
+            // Update the text box color if the user clicks OK 
+            if (MyDialog.ShowDialog() == DialogResult.OK)
+            {
+                mvBtn_WziemnikKoloruTla.BackColor = MyDialog.Color;
+                mvChart.BackColor = MyDialog.Color;
+            }
+        }
 
+        private void mvTxt_GruboscLiczbowo_TextChanged(object sender, EventArgs e)
+        {
+            int mvGrubosc;
+            if(!int.TryParse(mvTxt_GruboscLiczbowo.Text, out mvGrubosc))
+            {
+                errorProvider1.SetError(mvTxt_GruboscLiczbowo, "ERROR: Wystąpił blęd zapisu grubości linii!");
+                return;
+            }
+
+            if(mvGrubosc <= 0 || mvGrubosc > 5)
+            {
+                errorProvider1.SetError(mvTxt_GruboscLiczbowo, "ERROR: Grubości linii nie może być mniejsza od 1 i większa od 5!");
+                return;
+            }
+
+            errorProvider1.Dispose();
+            mvGruboscLinii = mvGrubosc;
+            mvChart.Series[0].BorderWidth = mvGruboscLinii;
+            mvTb_GruboscLinii.Value = mvGruboscLinii;
+        }
+
+        private void mvTb_GruboscLinii_Scroll(object sender, EventArgs e)
+        {
+            mvGruboscLinii = mvTb_GruboscLinii.Value;
+            mvChart.Series[0].BorderWidth = mvGruboscLinii;
+            mvTxt_GruboscLiczbowo.Text = mvGruboscLinii.ToString();
+        }
+
+        private void mvCb_StylLinii_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (mvCb_StylLinii.SelectedIndex)
+            {
+                case 0:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
+                    break;
+                case 1:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+                    break;
+                case 2:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDotDot;
+                    break;
+                case 3:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+                    break;
+                case 4:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                    break;
+                default:
+                    mvChart.Series[0].BorderDashStyle =
+                            System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                    break;
+            }
+        }
+
+        private void mvTxt_RozmiarTabeli_TextChanged(object sender, EventArgs e)
+        {
+            if (!int.TryParse(mvTxt_RozmiarTabeli.Text, out MaxRozmiarTabl))
+            {
+                errorProvider1.SetError(mvTxt_RozmiarTabeli, "ERROR: wpodanej liczności rozmiaru tabeli wystąpił niedozwolony znak");
+                mvBtn_AkceptacjaDanych.Enabled = false;
+                return;
+            }
+
+            if (MaxRozmiarTabl < 1)
+            {
+                errorProvider1.SetError(mvTxt_RozmiarTabeli, "ERROR: Rozmiar tabeli nie może być mniejszy od 1!");
+                mvBtn_AkceptacjaDanych.Enabled = false;
+                return;
+            }
+            mvBtn_AkceptacjaDanych.Enabled = true;
+            errorProvider1.Dispose();
+        }
+
+        private void mvTxt_DolnaGranica_TextChanged(object sender, EventArgs e)
+        {
+            if (!int.TryParse(mvTxt_DolnaGranica.Text, out MaxRozmiarTabl))
+            {
+                errorProvider1.SetError(mvTxt_DolnaGranica, "ERROR: wpodanej liczności dolnej granicy wystąpił niedozwolony znak");
+                mvBtn_AkceptacjaDanych.Enabled = false;
+                return;
+            }
+            mvBtn_AkceptacjaDanych.Enabled = true;
+            errorProvider1.Dispose();
+        }
+
+        private void mvTxt_GornaGranica_TextChanged(object sender, EventArgs e)
+        {
+            if (!int.TryParse(mvTxt_GornaGranica.Text, out MaxRozmiarTabl))
+            {
+                errorProvider1.SetError(mvTxt_GornaGranica, "ERROR: wpodanej liczności gornej granicy wystąpił niedozwolony znak");
+                mvBtn_AkceptacjaDanych.Enabled = false;
+                return;
+            }
+            mvBtn_AkceptacjaDanych.Enabled = true;
+            errorProvider1.Dispose();
         }
     }
 }

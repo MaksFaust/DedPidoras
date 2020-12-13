@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.mvLbl_MinProba = new System.Windows.Forms.Label();
             this.mvLbl_MaxProba = new System.Windows.Forms.Label();
             this.mvLbl_DolnaGranica = new System.Windows.Forms.Label();
@@ -89,7 +91,7 @@
             this.mvLbl_MinProba.Location = new System.Drawing.Point(15, 96);
             this.mvLbl_MinProba.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_MinProba.Name = "mvLbl_MinProba";
-            this.mvLbl_MinProba.Size = new System.Drawing.Size(125, 40);
+            this.mvLbl_MinProba.Size = new System.Drawing.Size(156, 50);
             this.mvLbl_MinProba.TabIndex = 1;
             this.mvLbl_MinProba.Text = "Minimalna próba\r\nbadawcza";
             this.mvLbl_MinProba.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -101,11 +103,10 @@
             this.mvLbl_MaxProba.Location = new System.Drawing.Point(15, 153);
             this.mvLbl_MaxProba.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_MaxProba.Name = "mvLbl_MaxProba";
-            this.mvLbl_MaxProba.Size = new System.Drawing.Size(110, 20);
+            this.mvLbl_MaxProba.Size = new System.Drawing.Size(134, 25);
             this.mvLbl_MaxProba.TabIndex = 2;
             this.mvLbl_MaxProba.Text = "Rozmiar tabeli";
             this.mvLbl_MaxProba.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.mvLbl_MaxProba.Click += new System.EventHandler(this.mvLbl_MaxProba_Click);
             // 
             // mvLbl_DolnaGranica
             // 
@@ -114,7 +115,7 @@
             this.mvLbl_DolnaGranica.Location = new System.Drawing.Point(15, 209);
             this.mvLbl_DolnaGranica.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_DolnaGranica.Name = "mvLbl_DolnaGranica";
-            this.mvLbl_DolnaGranica.Size = new System.Drawing.Size(107, 20);
+            this.mvLbl_DolnaGranica.Size = new System.Drawing.Size(132, 25);
             this.mvLbl_DolnaGranica.TabIndex = 3;
             this.mvLbl_DolnaGranica.Text = "Dolna granica";
             this.mvLbl_DolnaGranica.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -126,7 +127,7 @@
             this.mvLbl_GornaGranica.Location = new System.Drawing.Point(15, 265);
             this.mvLbl_GornaGranica.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_GornaGranica.Name = "mvLbl_GornaGranica";
-            this.mvLbl_GornaGranica.Size = new System.Drawing.Size(110, 20);
+            this.mvLbl_GornaGranica.Size = new System.Drawing.Size(135, 25);
             this.mvLbl_GornaGranica.TabIndex = 4;
             this.mvLbl_GornaGranica.Text = "Gorna granica";
             this.mvLbl_GornaGranica.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -149,7 +150,7 @@
             this.mvTxt_MinProba.Location = new System.Drawing.Point(19, 121);
             this.mvTxt_MinProba.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_MinProba.Name = "mvTxt_MinProba";
-            this.mvTxt_MinProba.Size = new System.Drawing.Size(124, 24);
+            this.mvTxt_MinProba.Size = new System.Drawing.Size(124, 28);
             this.mvTxt_MinProba.TabIndex = 6;
             this.mvTxt_MinProba.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mvTxt_MinProba.TextChanged += new System.EventHandler(this.mvTxt_MinProba_TextChanged);
@@ -160,9 +161,10 @@
             this.mvTxt_RozmiarTabeli.Location = new System.Drawing.Point(15, 177);
             this.mvTxt_RozmiarTabeli.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_RozmiarTabeli.Name = "mvTxt_RozmiarTabeli";
-            this.mvTxt_RozmiarTabeli.Size = new System.Drawing.Size(124, 24);
+            this.mvTxt_RozmiarTabeli.Size = new System.Drawing.Size(124, 28);
             this.mvTxt_RozmiarTabeli.TabIndex = 7;
             this.mvTxt_RozmiarTabeli.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mvTxt_RozmiarTabeli.TextChanged += new System.EventHandler(this.mvTxt_RozmiarTabeli_TextChanged);
             // 
             // mvTxt_DolnaGranica
             // 
@@ -170,9 +172,10 @@
             this.mvTxt_DolnaGranica.Location = new System.Drawing.Point(22, 243);
             this.mvTxt_DolnaGranica.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_DolnaGranica.Name = "mvTxt_DolnaGranica";
-            this.mvTxt_DolnaGranica.Size = new System.Drawing.Size(124, 24);
+            this.mvTxt_DolnaGranica.Size = new System.Drawing.Size(124, 28);
             this.mvTxt_DolnaGranica.TabIndex = 8;
             this.mvTxt_DolnaGranica.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mvTxt_DolnaGranica.TextChanged += new System.EventHandler(this.mvTxt_DolnaGranica_TextChanged);
             // 
             // mvTxt_GornaGranica
             // 
@@ -180,9 +183,10 @@
             this.mvTxt_GornaGranica.Location = new System.Drawing.Point(19, 299);
             this.mvTxt_GornaGranica.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_GornaGranica.Name = "mvTxt_GornaGranica";
-            this.mvTxt_GornaGranica.Size = new System.Drawing.Size(124, 24);
+            this.mvTxt_GornaGranica.Size = new System.Drawing.Size(124, 28);
             this.mvTxt_GornaGranica.TabIndex = 9;
             this.mvTxt_GornaGranica.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mvTxt_GornaGranica.TextChanged += new System.EventHandler(this.mvTxt_GornaGranica_TextChanged);
             // 
             // mvLbl_WybierzAlgorytm
             // 
@@ -190,7 +194,7 @@
             this.mvLbl_WybierzAlgorytm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvLbl_WybierzAlgorytm.Location = new System.Drawing.Point(17, 331);
             this.mvLbl_WybierzAlgorytm.Name = "mvLbl_WybierzAlgorytm";
-            this.mvLbl_WybierzAlgorytm.Size = new System.Drawing.Size(203, 20);
+            this.mvLbl_WybierzAlgorytm.Size = new System.Drawing.Size(256, 25);
             this.mvLbl_WybierzAlgorytm.TabIndex = 10;
             this.mvLbl_WybierzAlgorytm.Text = "Wybierz algorytm do analizy";
             this.mvLbl_WybierzAlgorytm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -206,7 +210,7 @@
             "Shake Sort"});
             this.mvCb_Algorytm.Location = new System.Drawing.Point(19, 359);
             this.mvCb_Algorytm.Name = "mvCb_Algorytm";
-            this.mvCb_Algorytm.Size = new System.Drawing.Size(121, 25);
+            this.mvCb_Algorytm.Size = new System.Drawing.Size(121, 30);
             this.mvCb_Algorytm.TabIndex = 11;
             // 
             // mvBtn_AkceptacjaDanych
@@ -226,7 +230,7 @@
             this.mvLbl_Analizator.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvLbl_Analizator.Location = new System.Drawing.Point(318, 15);
             this.mvLbl_Analizator.Name = "mvLbl_Analizator";
-            this.mvLbl_Analizator.Size = new System.Drawing.Size(765, 31);
+            this.mvLbl_Analizator.Size = new System.Drawing.Size(909, 38);
             this.mvLbl_Analizator.TabIndex = 13;
             this.mvLbl_Analizator.Text = "Analizator zloznosci obliczeniowej algorytmow sortowania";
             // 
@@ -237,7 +241,7 @@
             this.mvLbl_WziemikKoloruLinii.Location = new System.Drawing.Point(309, 96);
             this.mvLbl_WziemikKoloruLinii.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_WziemikKoloruLinii.Name = "mvLbl_WziemikKoloruLinii";
-            this.mvLbl_WziemikKoloruLinii.Size = new System.Drawing.Size(140, 20);
+            this.mvLbl_WziemikKoloruLinii.Size = new System.Drawing.Size(177, 25);
             this.mvLbl_WziemikKoloruLinii.TabIndex = 14;
             this.mvLbl_WziemikKoloruLinii.Text = "Wziemik koloru linii";
             this.mvLbl_WziemikKoloruLinii.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -262,6 +266,7 @@
             this.mvBtn_KolorTla.TabIndex = 16;
             this.mvBtn_KolorTla.Text = "Wybierz kolor tla dla obszaru wykresu";
             this.mvBtn_KolorTla.UseVisualStyleBackColor = true;
+            this.mvBtn_KolorTla.Click += new System.EventHandler(this.mvBtn_KolorTla_Click);
             // 
             // mvBtn_WziemnikKoloruTla
             // 
@@ -281,7 +286,7 @@
             this.mvLbl_KolorTla.Location = new System.Drawing.Point(671, 96);
             this.mvLbl_KolorTla.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_KolorTla.Name = "mvLbl_KolorTla";
-            this.mvLbl_KolorTla.Size = new System.Drawing.Size(136, 20);
+            this.mvLbl_KolorTla.Size = new System.Drawing.Size(170, 25);
             this.mvLbl_KolorTla.TabIndex = 17;
             this.mvLbl_KolorTla.Text = "Wziemik koloru tla";
             this.mvLbl_KolorTla.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -293,7 +298,7 @@
             this.mvLbl_StylLinii.Location = new System.Drawing.Point(903, 96);
             this.mvLbl_StylLinii.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_StylLinii.Name = "mvLbl_StylLinii";
-            this.mvLbl_StylLinii.Size = new System.Drawing.Size(159, 20);
+            this.mvLbl_StylLinii.Size = new System.Drawing.Size(199, 25);
             this.mvLbl_StylLinii.TabIndex = 19;
             this.mvLbl_StylLinii.Text = "Ustal styl linii wykresu";
             this.mvLbl_StylLinii.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -302,11 +307,18 @@
             // 
             this.mvCb_StylLinii.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvCb_StylLinii.FormattingEnabled = true;
+            this.mvCb_StylLinii.Items.AddRange(new object[] {
+            "Dash Dot",
+            "Dash",
+            "Dash Dot Dot",
+            "Dot",
+            "Solid"});
             this.mvCb_StylLinii.Location = new System.Drawing.Point(908, 124);
             this.mvCb_StylLinii.Name = "mvCb_StylLinii";
-            this.mvCb_StylLinii.Size = new System.Drawing.Size(121, 25);
+            this.mvCb_StylLinii.Size = new System.Drawing.Size(121, 30);
             this.mvCb_StylLinii.TabIndex = 20;
             this.mvCb_StylLinii.Text = "Wybierz styl linii";
+            this.mvCb_StylLinii.SelectedIndexChanged += new System.EventHandler(this.mvCb_StylLinii_SelectedIndexChanged);
             // 
             // mvLbl_GruboscLinii
             // 
@@ -315,7 +327,7 @@
             this.mvLbl_GruboscLinii.Location = new System.Drawing.Point(1175, 95);
             this.mvLbl_GruboscLinii.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_GruboscLinii.Name = "mvLbl_GruboscLinii";
-            this.mvLbl_GruboscLinii.Size = new System.Drawing.Size(139, 40);
+            this.mvLbl_GruboscLinii.Size = new System.Drawing.Size(173, 50);
             this.mvLbl_GruboscLinii.TabIndex = 21;
             this.mvLbl_GruboscLinii.Text = "Zmien grubosc linii\r\nwykresu";
             this.mvLbl_GruboscLinii.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -323,9 +335,13 @@
             // mvTb_GruboscLinii
             // 
             this.mvTb_GruboscLinii.Location = new System.Drawing.Point(1180, 149);
+            this.mvTb_GruboscLinii.Maximum = 5;
+            this.mvTb_GruboscLinii.Minimum = 1;
             this.mvTb_GruboscLinii.Name = "mvTb_GruboscLinii";
-            this.mvTb_GruboscLinii.Size = new System.Drawing.Size(104, 45);
+            this.mvTb_GruboscLinii.Size = new System.Drawing.Size(104, 56);
             this.mvTb_GruboscLinii.TabIndex = 22;
+            this.mvTb_GruboscLinii.Value = 1;
+            this.mvTb_GruboscLinii.Scroll += new System.EventHandler(this.mvTb_GruboscLinii_Scroll);
             // 
             // mvLbl_GruboscLiniiLiczbowo
             // 
@@ -334,7 +350,7 @@
             this.mvLbl_GruboscLiniiLiczbowo.Location = new System.Drawing.Point(1175, 196);
             this.mvLbl_GruboscLiniiLiczbowo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_GruboscLiniiLiczbowo.Name = "mvLbl_GruboscLiniiLiczbowo";
-            this.mvLbl_GruboscLiniiLiczbowo.Size = new System.Drawing.Size(159, 40);
+            this.mvLbl_GruboscLiniiLiczbowo.Size = new System.Drawing.Size(196, 50);
             this.mvLbl_GruboscLiniiLiczbowo.TabIndex = 23;
             this.mvLbl_GruboscLiniiLiczbowo.Text = "Ustalona grubosc linii\r\n(liczbowo)";
             this.mvLbl_GruboscLiniiLiczbowo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -354,9 +370,10 @@
             this.mvTxt_GruboscLiczbowo.Location = new System.Drawing.Point(1208, 250);
             this.mvTxt_GruboscLiczbowo.Margin = new System.Windows.Forms.Padding(4);
             this.mvTxt_GruboscLiczbowo.Name = "mvTxt_GruboscLiczbowo";
-            this.mvTxt_GruboscLiczbowo.Size = new System.Drawing.Size(124, 24);
+            this.mvTxt_GruboscLiczbowo.Size = new System.Drawing.Size(124, 28);
             this.mvTxt_GruboscLiczbowo.TabIndex = 25;
             this.mvTxt_GruboscLiczbowo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mvTxt_GruboscLiczbowo.TextChanged += new System.EventHandler(this.mvTxt_GruboscLiczbowo_TextChanged);
             // 
             // mvLbl_WziemnikWzorcaLinii
             // 
@@ -365,13 +382,14 @@
             this.mvLbl_WziemnikWzorcaLinii.Location = new System.Drawing.Point(1175, 287);
             this.mvLbl_WziemnikWzorcaLinii.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.mvLbl_WziemnikWzorcaLinii.Name = "mvLbl_WziemnikWzorcaLinii";
-            this.mvLbl_WziemnikWzorcaLinii.Size = new System.Drawing.Size(156, 20);
+            this.mvLbl_WziemnikWzorcaLinii.Size = new System.Drawing.Size(197, 25);
             this.mvLbl_WziemnikWzorcaLinii.TabIndex = 26;
             this.mvLbl_WziemnikWzorcaLinii.Text = "Wziemnik wzorca linii";
             this.mvLbl_WziemnikWzorcaLinii.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mvBtn_Demo
             // 
+            this.mvBtn_Demo.Enabled = false;
             this.mvBtn_Demo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_Demo.Location = new System.Drawing.Point(1180, 563);
             this.mvBtn_Demo.Margin = new System.Windows.Forms.Padding(4);
@@ -383,6 +401,7 @@
             // 
             // mvBtn_TabelarycznaPrezentacja
             // 
+            this.mvBtn_TabelarycznaPrezentacja.Enabled = false;
             this.mvBtn_TabelarycznaPrezentacja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_TabelarycznaPrezentacja.Location = new System.Drawing.Point(1180, 377);
             this.mvBtn_TabelarycznaPrezentacja.Margin = new System.Windows.Forms.Padding(4);
@@ -395,6 +414,7 @@
             // 
             // mvBtn_GraficznaPrezentacja
             // 
+            this.mvBtn_GraficznaPrezentacja.Enabled = false;
             this.mvBtn_GraficznaPrezentacja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_GraficznaPrezentacja.Location = new System.Drawing.Point(1180, 439);
             this.mvBtn_GraficznaPrezentacja.Margin = new System.Windows.Forms.Padding(4);
@@ -407,6 +427,7 @@
             // 
             // mvBtn_Resetuj
             // 
+            this.mvBtn_Resetuj.Enabled = false;
             this.mvBtn_Resetuj.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_Resetuj.Location = new System.Drawing.Point(1180, 501);
             this.mvBtn_Resetuj.Margin = new System.Windows.Forms.Padding(4);
@@ -418,6 +439,7 @@
             // 
             // mvBtn_TablicaPrzedSortowaniem
             // 
+            this.mvBtn_TablicaPrzedSortowaniem.Enabled = false;
             this.mvBtn_TablicaPrzedSortowaniem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_TablicaPrzedSortowaniem.Location = new System.Drawing.Point(454, 634);
             this.mvBtn_TablicaPrzedSortowaniem.Margin = new System.Windows.Forms.Padding(4);
@@ -429,6 +451,7 @@
             // 
             // mvBtn_TablicaPoSortowaniu
             // 
+            this.mvBtn_TablicaPoSortowaniu.Enabled = false;
             this.mvBtn_TablicaPoSortowaniu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mvBtn_TablicaPoSortowaniu.Location = new System.Drawing.Point(746, 634);
             this.mvBtn_TablicaPoSortowaniu.Margin = new System.Windows.Forms.Padding(4);
@@ -445,23 +468,36 @@
             this.mvDgv_Tablica.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mvRozmiarTabeli,
             this.Column1});
-            this.mvDgv_Tablica.Location = new System.Drawing.Point(432, 355);
+            this.mvDgv_Tablica.Location = new System.Drawing.Point(193, 331);
             this.mvDgv_Tablica.Name = "mvDgv_Tablica";
+            this.mvDgv_Tablica.ReadOnly = true;
+            this.mvDgv_Tablica.RowHeadersVisible = false;
             this.mvDgv_Tablica.RowHeadersWidth = 51;
+            this.mvDgv_Tablica.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.mvDgv_Tablica.RowTemplate.Height = 24;
-            this.mvDgv_Tablica.Size = new System.Drawing.Size(240, 150);
+            this.mvDgv_Tablica.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.mvDgv_Tablica.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mvDgv_Tablica.Size = new System.Drawing.Size(538, 252);
             this.mvDgv_Tablica.TabIndex = 34;
             this.mvDgv_Tablica.Visible = false;
             // 
             // mvRozmiarTabeli
             // 
+            this.mvRozmiarTabeli.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.mvRozmiarTabeli.HeaderText = "Numer";
+            this.mvRozmiarTabeli.MinimumWidth = 6;
             this.mvRozmiarTabeli.Name = "mvRozmiarTabeli";
+            this.mvRozmiarTabeli.ReadOnly = true;
+            this.mvRozmiarTabeli.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Column1
             // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.HeaderText = "Element tablicy";
+            this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // errorProvider1
             // 
@@ -477,51 +513,78 @@
             this.dataGridViewTextBoxColumn4});
             this.mvdgvTabelaWynikow.Location = new System.Drawing.Point(789, 299);
             this.mvdgvTabelaWynikow.Name = "mvdgvTabelaWynikow";
+            this.mvdgvTabelaWynikow.RowHeadersVisible = false;
             this.mvdgvTabelaWynikow.RowHeadersWidth = 51;
             this.mvdgvTabelaWynikow.RowTemplate.Height = 24;
+            this.mvdgvTabelaWynikow.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.mvdgvTabelaWynikow.Size = new System.Drawing.Size(341, 150);
             this.mvdgvTabelaWynikow.TabIndex = 35;
             this.mvdgvTabelaWynikow.Visible = false;
             // 
             // dataGridViewTextBoxColumn1
             // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn1.HeaderText = "Rozmiar sortowanej tabeli";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // dataGridViewTextBoxColumn2
             // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn2.HeaderText = "Koszt czasowy z pomiaru";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // dataGridViewTextBoxColumn3
             // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn3.HeaderText = "Analtyczny koszt czasowy (na podstawie wzoru)";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // dataGridViewTextBoxColumn4
             // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.dataGridViewTextBoxColumn4.HeaderText = "Koszt pamięciowy";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // mvChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.mvChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.mvChart.Legends.Add(legend2);
-            this.mvChart.Location = new System.Drawing.Point(282, 209);
+            chartArea1.Name = "ChartArea1";
+            this.mvChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.mvChart.Legends.Add(legend1);
+            this.mvChart.Location = new System.Drawing.Point(237, 209);
             this.mvChart.Name = "mvChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
-            series2.Name = "Series1";
+            series2.Name = "Series2";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series3";
+            this.mvChart.Series.Add(series1);
             this.mvChart.Series.Add(series2);
+            this.mvChart.Series.Add(series3);
             this.mvChart.Size = new System.Drawing.Size(300, 300);
             this.mvChart.TabIndex = 36;
             this.mvChart.Text = "chart1";
             // 
             // AnalizatorAlgorytmowSortowania
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1641, 796);
             this.Controls.Add(this.mvChart);
@@ -612,13 +675,13 @@
         private System.Windows.Forms.DataGridView mvDgv_Tablica;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridView mvdgvTabelaWynikow;
+        private System.Windows.Forms.DataVisualization.Charting.Chart mvChart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mvRozmiarTabeli;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mvRozmiarTabeli;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart mvChart;
     }
 }
 
