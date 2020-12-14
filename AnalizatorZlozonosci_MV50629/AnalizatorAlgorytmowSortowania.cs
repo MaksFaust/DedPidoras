@@ -20,6 +20,7 @@ namespace AnalizatorZlozonosci_MV50629
         double DolnaGranicaWartości = 20.0;
         double GórnaGranicaWartości = 30000.0;
         double[] Tabl;
+        double[] TablPrzedSort;
         float[] WynikiZpomiaru;
         float[] WynikiAnalityczne;
         long[] KosztPamieci;
@@ -27,15 +28,16 @@ namespace AnalizatorZlozonosci_MV50629
         public AnalizatorAlgorytmowSortowania()
         {
             InitializeComponent();
-            Width = mvLbl_GruboscLinii.Right + mvMargines * 2;
-            Height = mvBtn_TablicaPrzedSortowaniem.Bottom + mvMargines;
-            CenterToScreen();
-            mvTxt_GruboscLiczbowo.Text = mvGruboscLinii.ToString();
+            
         }
 
         private void AnalizatorAlgorytmowSortowania_Load(object sender, EventArgs e)
         {
             /* Left */
+            Width = mvLbl_GruboscLinii.Right + mvMargines * 2;
+            Height = mvBtn_TablicaPrzedSortowaniem.Bottom + mvMargines;
+            CenterToScreen();
+            mvTxt_GruboscLiczbowo.Text = mvGruboscLinii.ToString();
 
             mvBtn_WybierzKolorLinii.AutoSize = true;
             mvBtn_WybierzKolorLinii.Location = new Point(mvMargines * 2, mvMargines * 4);
@@ -126,6 +128,12 @@ namespace AnalizatorZlozonosci_MV50629
             mvdgvTabelaWynikow.Size = mvChart.Size;
             mvdgvTabelaWynikow.Location = mvChart.Location;
 
+            mvpbAnimacja.Size = mvChart.Size;
+            mvpbAnimacja.Location = mvChart.Location;
+
+            
+
+
             //wartości domyślne
             mvTxt_MinProba.Text = PróbaBadawcza.ToString();
             mvTxt_RozmiarTabeli.Text = MaxRozmiarTabl.ToString();
@@ -144,6 +152,7 @@ namespace AnalizatorZlozonosci_MV50629
             }
             errorProvider1.Dispose();
             Tabl = new double[MaxRozmiarTabl];
+            TablPrzedSort = new double[MaxRozmiarTabl];
             WynikiZpomiaru = new float[MaxRozmiarTabl];
             WynikiAnalityczne = new float[MaxRozmiarTabl];
             KosztPamieci = new long[MaxRozmiarTabl];
@@ -152,7 +161,7 @@ namespace AnalizatorZlozonosci_MV50629
             mvBtn_TablicaPoSortowaniu.Enabled = true;
             // ustawienie stanu braku aktywności dla przycisku akceptacji 
             mvBtn_AkceptacjaDanych.Enabled = false;
-            mvBtn_TablicaPoSortowaniu.Enabled = mvBtn_TablicaPrzedSortowaniem.Enabled = true;
+            mvBtn_TablicaPoSortowaniu.Enabled = true;
             mvCb_Algorytm.Enabled = mvTxt_DolnaGranica.Enabled = mvTxt_GornaGranica.Enabled = mvTxt_MinProba.Enabled = mvTxt_RozmiarTabeli.Enabled = false;
         }
 
@@ -216,14 +225,26 @@ namespace AnalizatorZlozonosci_MV50629
                 {
                     // wylosowanie wartości elementów Tabl
                     for (int i = 0; i < MaxRozmiarTabl; i++)
+                    {
                         Tabl[i] = Rnd.NextDouble() * (GórnaGranicaWartości - DolnaGranicaWartości) + DolnaGranicaWartości;
+                        TablPrzedSort[i] = Tabl[i];
+                    }
+
+                    //if (k==0) {
+                    //    TablPrzedSort = Tabl;
+                    //    //foreach (double item in TablPrzedSort)
+                    //    //{
+                    //    //    Debug.WriteLine(item);
+                    //    //}
+                    //}
                     // wywołanie metody sortowania
                     switch (mvCb_Algorytm.SelectedIndex)
                     {
                         case 0:
                             mvLicznikOD = AlgorytmySortowania.SelectSort(ref Tabl, l+1);
                             break;
-                        case 1: mvLicznikOD = AlgorytmySortowania.InsertionSort(ref Tabl, l+1); break;
+                        case 1: mvLicznikOD = AlgorytmySortowania.InsertionSort(ref Tabl, l+1); 
+                            break;
 
                         case 2:
                             mvLicznikOD = AlgorytmySortowania.ShellSort(ref Tabl, l+1);
@@ -240,7 +261,8 @@ namespace AnalizatorZlozonosci_MV50629
                     TablicaLOD[k] = mvLicznikOD;
                 }
 
-                KosztPamieci[l] = GC.GetTotalMemory(false);
+
+                //KosztPamieci[l] = GC.GetTotalMemory(false);
                 // od for (int k = 0; k < PróbaBadawcza; k++)
                 // obliczenie średniej arytmetycznej wykonanych Operacji Dominujących
                 SumaOD = 0.0F;  // początkowy stan obliczeń
@@ -253,11 +275,19 @@ namespace AnalizatorZlozonosci_MV50629
                 // obliczenie kosztu czasowego ze wzoru analitycznego 
                 switch (mvCb_Algorytm.SelectedIndex)
                 {
-                    case 0:
+                    case 0:WynikiAnalityczne[l] = (l * (l - 1)) / 2;
+                        //SWynikiAnalityczne[l] = l * l;
+                        break;
                     case 1:
+                        WynikiAnalityczne[l] = (l * (l - 1)) / 2;
+                        //SWynikiAnalityczne[l] = l * l;
+                        break;
                     case 2:
+                            WynikiAnalityczne[l] = (float)((float)l*Math.Pow(Math.Log10(l), 2));
+                        break;
                     case 3:
                         WynikiAnalityczne[l] = (l * (l - 1)) / 2;
+                        //SWynikiAnalityczne[l] = l * l;
                         break;
 
                     // Case'y dla kolejnych metod sortowania
@@ -304,6 +334,7 @@ namespace AnalizatorZlozonosci_MV50629
             mvBtn_GraficznaPrezentacja.Enabled = true;
             mvBtn_Resetuj.Enabled = true;
             mvBtn_Demo.Enabled = true;
+            mvBtn_TablicaPrzedSortowaniem.Enabled = true;
         }
 
         private void mvBtn_TabelarycznaPrezentacja_Click(object sender, EventArgs e)
@@ -315,7 +346,7 @@ namespace AnalizatorZlozonosci_MV50629
                 mvdgvTabelaWynikow.Rows[i].Cells[0].Value = i+1;
                 mvdgvTabelaWynikow.Rows[i].Cells[1].Value = String.Format("{0:F2}", WynikiZpomiaru[i]);
                 mvdgvTabelaWynikow.Rows[i].Cells[2].Value = String.Format("{0:F2}", WynikiAnalityczne[i]);
-                mvdgvTabelaWynikow.Rows[i].Cells[3].Value = String.Format("{0:F2}", KosztPamieci[i]);
+                mvdgvTabelaWynikow.Rows[i].Cells[3].Value = String.Format("{0:F2}", i);
                 // ustawienie koloru tła (dla zwiększenia czytelności wyników)
                 if (i % 2 == 0)
                 {
@@ -343,6 +374,7 @@ namespace AnalizatorZlozonosci_MV50629
             mvDgv_Tablica.Visible = false;
             // ustawienie stanu braku aktywności dla przycisku tabelaryzacji 
             mvBtn_TabelarycznaPrezentacja.Enabled = false;
+            
         }
 
         private void mvBtn_GraficznaPrezentacja_Click(object sender, EventArgs e)
@@ -415,12 +447,12 @@ namespace AnalizatorZlozonosci_MV50629
             System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             mvChart.Series[2].BorderWidth = 1;
             long[] cs = new long[MaxRozmiarTabl];
-            int index = 0;
-            foreach(long l in KosztPamieci)
-            {
-                cs[index] = l/10000;
-                index++;
-            }
+            //int index = 0;
+            //foreach(long l in KosztPamieci)
+            //{
+            //    cs[index] = l/10000;
+            //    index++;
+            //}
             mvChart.Series[2].Points.DataBindXY(RozmiarTabeli, cs);
             mvBtn_GraficznaPrezentacja.Enabled = false;
         }
@@ -703,6 +735,91 @@ namespace AnalizatorZlozonosci_MV50629
             }
             mvBtn_AkceptacjaDanych.Enabled = true;
             errorProvider1.Dispose();
+        }
+
+        private void mvBtn_Resetuj_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            InitializeComponent();
+            AnalizatorAlgorytmowSortowania_Load(sender, e);
+        }
+
+        private void mvBtn_TablicaPrzedSortowaniem_Click(object sender, EventArgs e)
+        {
+            //foreach (double item in TablPrzedSort)
+            //{
+            //    Debug.WriteLine(item);
+            //}
+            mvDgv_Tablica.Rows.Clear();
+            mvDgv_Tablica.Refresh();
+            for (int i = 0; i < MaxRozmiarTabl; i++)
+            {
+
+                mvDgv_Tablica.Rows.Add();
+                // wpisujemy wyniki do poszczególnych komórek 
+                mvDgv_Tablica.Rows[i].Cells[0].Value = i;
+                mvDgv_Tablica.Rows[i].Cells[1].Value = String.Format("{0, 8:F3}", TablPrzedSort[i]);
+
+                // naprzemienna zmiana tła wierszy w kontrolce DataGridView
+                if ((i % 2) == 0)
+                {
+                    mvDgv_Tablica.Rows[i].Cells[0].Style.BackColor = Color.LightGray;
+                    mvDgv_Tablica.Rows[i].Cells[1].Style.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    mvDgv_Tablica.Rows[i].Cells[0].Style.BackColor = Color.White;
+                    mvDgv_Tablica.Rows[i].Cells[1].Style.BackColor = Color.White;
+                }
+                // wycentrowanie zapisów w poszczególnych komórkach formatowanego wierszy 
+                mvDgv_Tablica.Rows[i].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                mvDgv_Tablica.Rows[i].Cells[1].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+            // odsłonięcie kontrolki DataGridView 
+            mvDgv_Tablica.Visible = true;
+            mvBtn_TablicaPrzedSortowaniem.Enabled = false;
+        }
+
+        private void mvpbAnimacja_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mvBtn_Demo_Click(object sender, EventArgs e)
+        {
+            mvpbAnimacja.Visible = true;
+            mvDgv_Tablica.Visible = false;
+            mvdgvTabelaWynikow.Visible = false;
+
+
+            switch (mvCb_Algorytm.SelectedIndex)
+            {
+                case 0:
+                    mvpbAnimacja.Image = Properties.Resources.Selection_Sort_Animation;
+                    break;
+                case 1:
+                    mvpbAnimacja.Image = Properties.Resources.Insertion;
+                    break;
+
+                case 2:
+                    mvpbAnimacja.Image = Properties.Resources.Sorting_shellsort_anim; ;
+                    break;
+                case 3:
+                    mvpbAnimacja.Image = Properties.Resources.Sorting_shaker_sort_anim; ;
+                    
+                    break;
+                // Case'y dla kolejnych metod sortowania
+                default:
+                    errorProvider1.SetError(mvBtn_TabelarycznaPrezentacja,
+                    "UWAGA: jeszcze tej metody nie opracowałem!!!"); return;
+            }
+
+            int a = mvpbAnimacja.Width - mvpbAnimacja.Image.Width;
+            int b = mvpbAnimacja.Height - mvpbAnimacja.Image.Height;
+            Padding p = new System.Windows.Forms.Padding();
+            p.Left = a / 2;
+            p.Top = b / 2;
+            mvpbAnimacja.Padding = p;
         }
     }
 }
